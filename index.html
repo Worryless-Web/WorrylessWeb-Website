@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Worryless Web | Websites for small businesses, handled</title>
+<meta name="description" content="Worryless Web builds and improves websites for small businesses, so you can get back to running yours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EAF2F6; --surface:#FFFFFF; --ink:#13263B; --muted:#4A5F75; --line:#C9D9E3;
+  --sun:#FFC83D; --sun-ink:#13263B; --ok:#1F7A6D; --ok-bg:#D8EFEA;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0E1B2A;--surface:#162638;--ink:#EAF2F6;--muted:#A5B8CA;--line:#2A3E54;--ok:#5FD1BF;--ok-bg:#16403B;color-scheme:dark}
+}
+:root[data-theme="dark"]{--bg:#0E1B2A;--surface:#162638;--ink:#EAF2F6;--muted:#A5B8CA;--line:#2A3E54;--ok:#5FD1BF;--ok-bg:#16403B;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+h1,h2,h3{font-family:var(--display);line-height:1.08;margin:0;letter-spacing:-.02em}
+h1{font-size:clamp(2.5rem,7vw,4.5rem);font-weight:700}
+h2{font-size:clamp(1.9rem,4.5vw,2.75rem);font-weight:700}
+h3{font-size:1.3rem;font-weight:500;letter-spacing:-.01em}
+p{margin:0}
+.btn{display:inline-block;font:600 1rem var(--body);background:var(--sun);color:var(--sun-ink);border:0;border-radius:999px;padding:.9rem 1.6rem;text-decoration:none;cursor:pointer;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 0}
+.logo{font:700 1.25rem var(--display);text-decoration:none;display:flex;align-items:center;gap:.55rem}
+.logo i{width:1.5rem;height:1.5rem;border-radius:50%;background:var(--sun);display:inline-block;box-shadow:0 0 0 4px color-mix(in srgb,var(--sun) 30%,transparent)}
+.nav ul{display:flex;gap:1.5rem;list-style:none;margin:0;padding:0;align-items:center}
+.nav ul a{text-decoration:none;font-weight:500}
+.nav ul a:hover{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:720px){.nav ul li:not(:last-child){display:none}}
+
+.hero-band{position:relative;overflow:hidden}
+.hero-band::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2rem;background:var(--line);border-top:2.5px solid var(--ink)}
+.hero{position:relative;z-index:1;padding:4rem 1.25rem calc(min(max(100vw,900px),1500px)*.1833 + 4.5rem)}
+.sc{display:block;pointer-events:none;height:auto;width:100%;min-width:900px;max-width:1500px;position:absolute;left:50%;transform:translateX(-50%)}
+.sc-hero{bottom:2rem}
+.sc-contact{bottom:0}
+.sc .bld{fill:var(--surface);stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round}
+.sc .sun{fill:var(--sun);stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round}
+.sc .grn{fill:var(--ok);stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round}
+.sc .glass{fill:var(--bg);stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round}
+.sc .ln{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.sc .wh{fill:var(--ink);stroke:var(--bg);stroke-width:3}
+.sc .hub{fill:var(--bg)}
+.sc .ink{fill:var(--ink)}
+.sc .txt{fill:#13263B}
+.sc text{font-family:var(--display);font-weight:700;text-anchor:middle}
+.contact-band{position:relative;overflow:hidden;padding-bottom:calc(min(max(100vw,900px),1500px)*.1167 + 3.5rem)}
+.contact-band .contact{position:relative;z-index:1}
+.pick{border:0;padding:0;margin:1.75rem 0 0;max-width:34rem;display:grid;gap:.7rem;min-width:0}
+.err:empty{display:none}
+.pick legend{font-weight:600;padding:0;margin-bottom:.5rem}
+.days,.times{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{font:600 .95rem var(--body);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:.5rem .8rem;cursor:pointer;text-align:center;line-height:1.25}
+.chip small{display:block;font-weight:500;color:var(--muted);font-size:.8rem}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip[aria-pressed="true"] small{color:inherit}
+.times .chip{min-width:5.2rem}
+.tz{font-size:.88rem;color:var(--muted)}
+.err{color:#B42318;font-weight:600;min-height:0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .err{color:#FF8A80}}
+:root[data-theme="dark"] .err{color:#FF8A80}
+.hero-grid{display:grid;gap:3rem;grid-template-columns:1.05fr 1fr;align-items:center}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
+.hero p.lead{font-size:1.25rem;color:var(--muted);margin:1.4rem 0 2rem;max-width:34rem}
+.cta-row{display:flex;gap:.9rem;flex-wrap:wrap}
+
+.handoff{background:var(--surface);border:2px solid var(--ink);border-radius:20px;padding:1.4rem;box-shadow:8px 8px 0 var(--sun)}
+.handoff h2{font-size:1.35rem;margin-bottom:.25rem}
+.handoff .sub{color:var(--muted);font-size:.95rem;margin-bottom:1rem}
+.worry{display:flex;gap:.8rem;align-items:flex-start;width:100%;text-align:left;font:inherit;color:inherit;background:transparent;border:1px solid var(--line);border-radius:12px;padding:.8rem .9rem;margin-bottom:.55rem;cursor:pointer;transition:background .25s,border-color .25s}
+.worry .box{flex:none;width:1.5rem;height:1.5rem;border-radius:7px;border:2px solid var(--ink);margin-top:.1rem;display:grid;place-items:center;font-size:.95rem;line-height:1;color:transparent;transition:all .25s}
+.worry .q{display:block;font-weight:600}
+.worry .a{display:block;color:var(--ok);font-size:.95rem;max-height:0;opacity:0;overflow:hidden;transition:max-height .3s,opacity .3s}
+.worry[aria-pressed="true"]{background:var(--ok-bg);border-color:var(--ok)}
+.worry[aria-pressed="true"] .box{background:var(--ok);border-color:var(--ok);color:#fff}
+.worry[aria-pressed="true"] .q{text-decoration:line-through;text-decoration-thickness:2px;color:var(--muted);font-weight:500}
+.worry[aria-pressed="true"] .a{max-height:3.5rem;opacity:1}
+.tally{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:.9rem;font-weight:600}
+.tally button{font:500 .95rem var(--body);background:none;border:0;color:var(--ink);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+
+section{padding:4.5rem 0}
+.band{background:var(--surface);border-block:1px solid var(--line)}
+.intro{max-width:38rem;margin-bottom:2.5rem}
+.intro p{color:var(--muted);margin-top:1rem}
+.services{display:grid;gap:1.5rem;grid-template-columns:repeat(3,1fr)}
+@media(max-width:860px){.services{grid-template-columns:1fr}}
+.svc{border-top:4px solid var(--ink);padding-top:1.1rem}
+.svc:nth-child(2){border-color:var(--sun)}
+.svc:nth-child(3){border-color:var(--ok)}
+.svc p{color:var(--muted);margin-top:.6rem}
+.svc ul{margin:1rem 0 0;padding-left:1.1rem;color:var(--muted)}
+.svc li{margin-bottom:.3rem}
+
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:1.5rem;grid-template-columns:repeat(3,1fr);counter-reset:s}
+@media(max-width:860px){.steps{grid-template-columns:1fr}}
+.steps li{counter-increment:s;position:relative;padding-left:3.6rem}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:2.6rem;height:2.6rem;border-radius:50%;background:var(--ink);color:var(--bg);font:700 1.2rem var(--display);display:grid;place-items:center}
+.steps p{color:var(--muted);margin-top:.4rem}
+
+.promise{display:grid;gap:1rem 2.5rem;grid-template-columns:1fr 1fr}
+@media(max-width:720px){.promise{grid-template-columns:1fr}}
+.promise div{padding:1rem 0;border-bottom:1px solid var(--line)}
+.promise strong{display:block;font:500 1.15rem var(--display)}
+.promise span{color:var(--muted)}
+
+details{border-bottom:1px solid var(--line);padding:1rem 0}
+summary{cursor:pointer;font:500 1.15rem var(--display);list-style:none;display:flex;justify-content:space-between;gap:1rem}
+summary::after{content:"+";font-size:1.5rem;line-height:1}
+details[open] summary::after{content:"\2212"}
+details p{color:var(--muted);margin-top:.7rem;max-width:42rem}
+
+.contact{display:grid;gap:3rem;grid-template-columns:1fr 1fr;align-items:start}
+@media(max-width:860px){.contact{grid-template-columns:1fr}}
+form{display:grid;gap:1rem}
+label{font-weight:600;display:grid;gap:.35rem}
+input,textarea{font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:.8rem .9rem;width:100%}
+input:focus,textarea:focus{border-color:var(--ink);outline:none}
+textarea{min-height:7.5rem;resize:vertical}
+.sent{display:none;background:var(--ok-bg);border:2px solid var(--ok);border-radius:14px;padding:1.2rem}
+.sent.show{display:block}
+.why{padding:3rem 0 3.5rem}
+.why-grid{display:grid;gap:1.5rem 3rem;grid-template-columns:1fr 1.25fr;align-items:start}
+@media(max-width:860px){.why-grid{grid-template-columns:1fr;gap:2rem}}
+.why-grid .intro{margin:0}
+.stats{margin-top:2.25rem}
+.stats h3{font-size:1.3rem;margin-bottom:.9rem}
+.stats h4{font:500 1.05rem var(--display);letter-spacing:-.01em;color:var(--muted);margin:1.4rem 0 .8rem}
+.stats h3+h4{margin-top:0}
+.stat-list{display:grid;gap:1rem 1.25rem;grid-template-columns:repeat(4,1fr);margin:0;padding:0;list-style:none}
+@media(max-width:860px){.stat-list{grid-template-columns:repeat(2,1fr)}}
+.stat-list li{border-top:3px solid var(--sun);padding-top:.6rem}
+.stat-list li:nth-child(even){border-color:var(--ok)}
+.stat-list b{display:block;font:700 clamp(2rem,4vw,2.6rem) var(--display);letter-spacing:-.03em;line-height:1}
+.stat-list p{margin-top:.4rem;font-weight:500;font-size:.95rem;line-height:1.4}
+.stat-list small{display:block;margin-top:.45rem;color:var(--muted);font-size:.9rem;line-height:1.45}
+.stats .src{margin-top:1.1rem;color:var(--muted);font-size:.85rem;max-width:56rem}
+.why-grid .intro h2{font-size:clamp(1.8rem,4vw,2.5rem)}
+.reasons{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 1.5rem}
+@media(max-width:560px){.reasons{grid-template-columns:1fr}}
+.reasons li{padding:.6rem 0;border-bottom:1px solid var(--line)}
+.reasons strong{display:block;font:500 1.05rem var(--display);letter-spacing:-.01em}
+.reasons span{color:var(--muted);display:block;margin-top:.1rem;font-size:.92rem;line-height:1.4}
+footer{padding:2rem 0 3rem;color:var(--muted);font-size:.95rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap nav">
+    <a class="logo" href="#top"><i aria-hidden="true"></i>Worryless Web</a>
+    <ul>
+      <li><a href="#why">Why a website</a></li>
+      <li><a href="#services">What we do</a></li>
+      <li><a href="#process">How it works</a></li>
+      <li><a href="#faq">Questions</a></li>
+      <li><a class="btn" href="#contact" style="padding:.55rem 1.1rem">Get started</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero-band">
+  <svg class="sc sc-hero" viewBox="0 0 1200 220" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
+    <g transform="translate(0,10)">
+      <!-- cafe -->
+      <rect class="bld" x="30" y="90" width="230" height="120"/>
+      <path class="ln" d="M105 66V78M175 66V78"/>
+      <rect class="sun" x="85" y="40" width="110" height="26" rx="5"/>
+      <text class="txt" x="140" y="59" font-size="18">Café</text>
+      <rect class="sun" x="24" y="78" width="48.4" height="34"/>
+      <rect class="bld" x="72.4" y="78" width="48.4" height="34"/>
+      <rect class="sun" x="120.8" y="78" width="48.4" height="34"/>
+      <rect class="bld" x="169.2" y="78" width="48.4" height="34"/>
+      <rect class="sun" x="217.6" y="78" width="48.4" height="34"/>
+      <rect class="glass" x="60" y="135" width="48" height="75"/>
+      <circle class="ink" cx="98" cy="175" r="3"/>
+      <rect class="glass" x="130" y="128" width="100" height="56"/>
+      <rect class="sun" x="168" y="148" width="24" height="22" rx="5"/>
+      <path class="ln" d="M192 154h6a5 5 0 0 1 0 10h-6M174 142q-4-6 0-11M184 142q-4-6 0-11"/>
+      <!-- florist -->
+      <rect class="bld" x="300" y="110" width="170" height="100"/>
+      <path class="ln" d="M350 94V98M420 94V98"/>
+      <rect class="bld" x="330" y="70" width="110" height="24" rx="5"/>
+      <text class="ink" x="385" y="87" font-size="16">Florist</text>
+      <rect class="grn" x="294" y="98" width="45.5" height="26"/>
+      <rect class="bld" x="339.5" y="98" width="45.5" height="26"/>
+      <rect class="grn" x="385" y="98" width="45.5" height="26"/>
+      <rect class="bld" x="430.5" y="98" width="45.5" height="26"/>
+      <rect class="glass" x="322" y="138" width="74" height="50"/>
+      <rect class="glass" x="416" y="140" width="36" height="70"/>
+      <path class="ln" d="M337 190V166M363 190V160M389 190V168"/>
+      <circle class="sun" cx="337" cy="162" r="7"/>
+      <circle class="sun" cx="363" cy="156" r="7"/>
+      <circle class="sun" cx="389" cy="164" r="7"/>
+      <rect class="grn" x="328" y="190" width="18" height="20"/>
+      <rect class="grn" x="354" y="190" width="18" height="20"/>
+      <rect class="grn" x="380" y="190" width="18" height="20"/>
+      <!-- van -->
+      <path class="ln" d="M532 126H632M532 120H632M544 120V126M564 120V126M584 120V126M604 120V126M624 120V126M538 126V138M626 126V138"/>
+      <rect class="sun" x="520" y="138" width="120" height="62" rx="8"/>
+      <path class="sun" d="M640 138h22l22 26v36h-44z"/>
+      <path class="glass" d="M648 146h12l14 18h-26z"/>
+      <rect class="bld" x="534" y="152" width="76" height="28" rx="5"/>
+      <path class="ln" d="M546 166h52"/>
+      <circle class="wh" cx="565" cy="194" r="16"/><circle class="hub" cx="565" cy="194" r="5"/>
+      <circle class="wh" cx="655" cy="194" r="16"/><circle class="hub" cx="655" cy="194" r="5"/>
+      <!-- tree -->
+      <rect class="bld" x="705" y="175" width="6" height="35"/>
+      <circle class="grn" cx="708" cy="162" r="15"/>
+      <!-- bakery -->
+      <rect class="bld" x="730" y="90" width="170" height="120"/>
+      <path class="ln" d="M785 70V78M845 70V78"/>
+      <rect class="sun" x="765" y="44" width="100" height="26" rx="5"/>
+      <text class="txt" x="815" y="63" font-size="18">Bakery</text>
+      <rect class="grn" x="724" y="78" width="182" height="14"/>
+      <path class="glass" d="M758 170V140a22 22 0 0 1 44 0V170z"/>
+      <ellipse class="sun" cx="772" cy="164" rx="9" ry="6"/>
+      <ellipse class="sun" cx="790" cy="164" rx="9" ry="6"/>
+      <rect class="bld" x="752" y="170" width="56" height="8"/>
+      <rect class="glass" x="830" y="140" width="44" height="70"/>
+      <!-- tree -->
+      <rect class="bld" x="917" y="178" width="6" height="32"/>
+      <circle class="grn" cx="920" cy="165" r="14"/>
+      <!-- barber -->
+      <rect class="bld" x="940" y="100" width="220" height="110"/>
+      <path class="ln" d="M1000 80V90M1100 80V90"/>
+      <rect class="bld" x="985" y="52" width="130" height="28" rx="5"/>
+      <text class="ink" x="1050" y="72" font-size="18">Barber</text>
+      <rect class="grn" x="934" y="90" width="232" height="12"/>
+      <rect class="glass" x="965" y="125" width="110" height="70"/>
+      <rect class="sun" x="985" y="145" width="70" height="28" rx="6"/>
+      <text class="txt" x="1020" y="164" font-size="16">Open</text>
+      <rect class="glass" x="1100" y="130" width="40" height="80"/>
+      <!-- tree -->
+      <rect class="bld" x="1179" y="180" width="6" height="30"/>
+      <circle class="grn" cx="1182" cy="172" r="14"/>
+    </g>
+  </svg>
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <h1>A website that works for your customers, not against your schedule.</h1>
+        <p class="lead">We build and improve websites for small businesses, and we take care of everything behind them. You run the business. We handle the web.</p>
+        <div class="cta-row">
+          <a class="btn" href="#contact">Get started</a>
+          <a class="btn ghost" href="#process">See how it works</a>
+        </div>
+      </div>
+
+      <div class="handoff" aria-labelledby="hand-h">
+        <h2 id="hand-h">Tap a worry. We’ll take it.</h2>
+        <p class="sub">The things website owners lose sleep over, handed off.</p>
+        <div id="worries"></div>
+        <div class="tally">
+          <span id="count" aria-live="polite">0 of 5 handed off</span>
+          <button type="button" id="all">Hand off everything</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <section id="why" class="why">
+    <div class="wrap why-grid">
+      <div class="intro">
+        <h2>Why does a small business need a website?</h2>
+        <p>A new customer hears about you and looks you up. What they find decides whether they call, visit or move on.</p>
+      </div>
+      <ul class="reasons">
+        <li><strong>People check before they come</strong><span>Hours, prices and photos are one search away.</span></li>
+        <li><strong>You’re open when you’re closed</strong><span>Your site answers questions at midnight and on weekends.</span></li>
+        <li><strong>It builds trust</strong><span>A clear, current site shows you’re a real business.</span></li>
+        <li><strong>Local customers find you</strong><span>You show up when people nearby search for what you do.</span></li>
+        <li><strong>It’s yours</strong><span>Social pages can change their rules. Your site stays yours.</span></li>
+        <li><strong>It saves you time</strong><span>Answer common questions once, not by phone every day.</span></li>
+      </ul>
+    </div>
+    <div class="wrap stats">
+      <h3>The numbers behind it</h3>
+      <h4>How customers use websites</h4>
+      <ul class="stat-list">
+        <li><b>80%</b><p>of US consumers search online for local businesses every week, and 32% do it every day.</p></li>
+        <li><b>54%</b><p>visit a business’s website after reading positive reviews.</p></li>
+        <li><b>68%</b><p>check a business’s website when researching one they don’t know. Only reviews and Google search ranked higher.</p></li>
+        <li><b>58%</b><p>often or always check a business’s website to confirm what they saw on social media or Google.</p></li>
+      </ul>
+      <h4>What happens without one</h4>
+      <ul class="stat-list">
+        <li><b>39%</b><p>have skipped visiting or buying from a business because it had no website. That rises to 45% for ages 18 to 44.</p></li>
+        <li><b>69%</b><p>say a website is essential for a local business to be credible. Only online reviews ranked higher, at 74%.</p></li>
+        <li><b>83%</b><p>of small businesses now have a website, up from 64% in 2018.</p></li>
+        <li><b>72%</b><p>look at three or fewer businesses before deciding.</p></li>
+      </ul>
+      <p class="src">Sources: <a href="https://www.dreamhost.com/blog/dreamhost-2026-local-business-trust-index/" target="_blank" rel="noopener">DreamHost 2026 Local Business Trust Index</a> (1,200+ US consumers); <a href="https://www.actionnewsjax.com/news/97-americans-have/HZZHJQELIA6VRNA25B7GVHSO54/" target="_blank" rel="noopener">TrustedFirms.io Online Trust Report</a> (September 2026); <a href="https://www.brightlocal.com/learn/local-seo/local-seo-statistics/" target="_blank" rel="noopener">BrightLocal 2026 consumer surveys</a>; SOCi Consumer Behavior Index (2024); <a href="https://www.businesswire.com/news/home/20250821848152/en/Clutch-Report-No-Code-Tools-Fuel-Website-Growth-Yet-17-of-Small-Businesses-are-Still-Offline" target="_blank" rel="noopener">Clutch small business survey</a> (2025).</p>
+    </div>
+  </section>
+
+  <section id="services" class="band">
+    <div class="wrap">
+      <div class="intro">
+        <h2>Pick where you’re starting from.</h2>
+        <p>Whether you have no site, a site you’ve outgrown, or one that just needs someone to look after it, there’s a plain, simple way in.</p>
+      </div>
+      <div class="services">
+        <article class="svc">
+          <h3>A new website</h3>
+          <p>Clear, fast and made to turn visitors into calls, bookings and visits.</p>
+          <ul><li>Written around your customers’ questions</li><li>Looks great on phones first</li><li>Domain, hosting and email set up for you</li></ul>
+        </article>
+        <article class="svc">
+          <h3>A website refresh</h3>
+          <p>Keep what works, fix what doesn’t. Your site gets clearer, quicker and easier to trust.</p>
+          <ul><li>Honest review of what’s holding it back</li><li>Better layout, wording and photos</li><li>Faster loading and easier to find</li></ul>
+        </article>
+        <article class="svc">
+          <h3>Ongoing care</h3>
+          <p>A real person looks after your site every month, so it never goes stale or breaks.</p>
+          <ul><li>Updates, backups and security</li><li>Changes by text or email</li><li>Monthly check that everything is working</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <div class="intro">
+        <h2>You do three things. We do the rest.</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Tell us about your business</h3><p>A short phone or video call. What you do, who you serve, what a good week looks like.</p></li>
+        <li><h3>Review what we make</h3><p>We build it and show you. You tell us what to change. No jargon, no tech homework.</p></li>
+        <li><h3>Launch and relax</h3><p>We go live, set up care if you want it, and stay on call for anything that comes up.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="intro"><h2>What you can count on.</h2></div>
+      <div class="promise">
+        <div><strong>Plain language, always</strong><span>We explain things the way we’d explain them to a friend.</span></div>
+        <div><strong>One person to call</strong><span>You never have to work out who to ask.</span></div>
+        <div><strong>Fixed, upfront pricing</strong><span>You know the cost before we start. No surprise invoices.</span></div>
+        <div><strong>Your site, your ownership</strong><span>Your domain and content are yours, and you can take them with you.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="intro"><h2>Questions small business owners ask us.</h2></div>
+      <details><summary>I’m not technical. Is that a problem?</summary><p>Not at all. That’s who we work for. You never need to log in to anything, edit code or learn new software.</p></details>
+      <details><summary>How long does a new website take?</summary><p>Most small business sites take a few weeks from first chat to launch. We’ll give you a clear timeline before we begin.</p></details>
+      <details><summary>What if I need a change after launch?</summary><p>Send us a text or email. Small updates like hours, prices and photos are part of ongoing care.</p></details>
+      <details><summary>Can you improve the website I already have?</summary><p>Yes. Tell us what you have and what’s bothering you. We’ll suggest what to fix, and you decide how much to do.</p></details>
+      <details><summary>Do I own my website?</summary><p>You do. Your domain, content and photos stay yours.</p></details>
+    </div>
+  </section>
+
+  <section id="contact" class="band contact-band">
+    <div class="wrap contact">
+      <div>
+        <h2>Let’s take the website off your list.</h2>
+        <p style="color:var(--muted);margin-top:1rem;max-width:30rem">Tell us a little about your business and pick a time that suits you. We’ll call you then. No pressure.</p>
+        <fieldset class="pick">
+          <legend>When should we call you?</legend>
+          <div class="days" id="days" role="group" aria-label="Choose a day"></div>
+          <div class="times" id="times" role="group" aria-label="Choose a time"></div>
+          <p class="tz" id="tz"></p>
+        </fieldset>
+      </div>
+      <div>
+        <form id="form" novalidate>
+          <label>Your name<input name="name" autocomplete="name" required></label>
+          <label>Email<input name="email" type="email" autocomplete="email" required></label>
+          <label>Phone number to call<input name="phone" type="tel" autocomplete="tel" required></label>
+          <label>Business name and website (if you have one)<input name="biz"></label>
+          <label>What would you like help with?<textarea name="msg"></textarea></label>
+          <p class="err" id="err" role="alert"></p>
+          <button class="btn" type="submit">Request this call</button>
+        </form>
+        <div class="sent" id="sent" role="status" tabindex="-1"><strong>Thank you, <span id="who"></span>.</strong><br>Your call is requested for <span id="when"></span>. We’ll call you at <span id="num"></span>.</div>
+      </div>
+    </div>
+    <svg class="sc sc-contact" viewBox="0 0 1200 140" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
+      <!-- stall 1: fruit -->
+      <g transform="translate(60,0)">
+        <path class="ln" d="M12 56V90M208 56V90"/>
+        <rect class="bld" x="0" y="90" width="220" height="50"/>
+        <rect class="sun" x="0" y="28" width="44" height="28"/><rect class="bld" x="44" y="28" width="44" height="28"/><rect class="sun" x="88" y="28" width="44" height="28"/><rect class="bld" x="132" y="28" width="44" height="28"/><rect class="sun" x="176" y="28" width="44" height="28"/>
+        <circle class="sun" cx="60" cy="80" r="10"/><circle class="grn" cx="90" cy="80" r="10"/><circle class="sun" cx="120" cy="80" r="10"/><circle class="grn" cx="150" cy="80" r="10"/>
+      </g>
+      <!-- stall 2: plants -->
+      <g transform="translate(340,0)">
+        <path class="ln" d="M12 56V90M208 56V90"/>
+        <rect class="bld" x="0" y="90" width="220" height="50"/>
+        <rect class="grn" x="0" y="28" width="44" height="28"/><rect class="bld" x="44" y="28" width="44" height="28"/><rect class="grn" x="88" y="28" width="44" height="28"/><rect class="bld" x="132" y="28" width="44" height="28"/><rect class="grn" x="176" y="28" width="44" height="28"/>
+        <path class="ln" d="M60 72V64M110 72V64M160 72V64"/>
+        <circle class="sun" cx="60" cy="62" r="6"/><circle class="sun" cx="110" cy="62" r="6"/><circle class="sun" cx="160" cy="62" r="6"/>
+        <rect class="grn" x="50" y="72" width="20" height="18"/><rect class="grn" x="100" y="72" width="20" height="18"/><rect class="grn" x="150" y="72" width="20" height="18"/>
+      </g>
+      <!-- stall 3: jars -->
+      <g transform="translate(620,0)">
+        <path class="ln" d="M12 56V90M208 56V90"/>
+        <rect class="bld" x="0" y="90" width="220" height="50"/>
+        <rect class="bld" x="0" y="28" width="44" height="28"/><rect class="sun" x="44" y="28" width="44" height="28"/><rect class="bld" x="88" y="28" width="44" height="28"/><rect class="sun" x="132" y="28" width="44" height="28"/><rect class="bld" x="176" y="28" width="44" height="28"/>
+        <rect class="glass" x="50" y="64" width="20" height="26"/><rect class="glass" x="95" y="64" width="20" height="26"/><rect class="glass" x="140" y="64" width="20" height="26"/>
+        <rect class="grn" x="49" y="60" width="22" height="6"/><rect class="grn" x="94" y="60" width="22" height="6"/><rect class="grn" x="139" y="60" width="22" height="6"/>
+      </g>
+      <!-- stall 4: open sign -->
+      <g transform="translate(900,0)">
+        <path class="ln" d="M12 56V90M208 56V90M80 56V64M140 56V64"/>
+        <rect class="bld" x="0" y="90" width="220" height="50"/>
+        <rect class="sun" x="0" y="28" width="44" height="28"/><rect class="grn" x="44" y="28" width="44" height="28"/><rect class="sun" x="88" y="28" width="44" height="28"/><rect class="grn" x="132" y="28" width="44" height="28"/><rect class="sun" x="176" y="28" width="44" height="28"/>
+        <rect class="sun" x="66" y="64" width="88" height="22" rx="6"/>
+        <text class="txt" x="110" y="80" font-size="15">Open</text>
+      </g>
+      <!-- trees -->
+      <rect class="bld" x="307" y="112" width="6" height="28"/><circle class="grn" cx="310" cy="100" r="20"/>
+      <rect class="bld" x="587" y="112" width="6" height="28"/><circle class="grn" cx="590" cy="100" r="20"/>
+      <rect class="bld" x="867" y="112" width="6" height="28"/><circle class="grn" cx="870" cy="100" r="20"/>
+    </svg>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Worryless Web</span><span>Websites for small businesses, handled.</span></div>
+</footer>
+
+<script>
+(function(){
+  var items=[
+    ["Will my website stay online?","We host it and keep an eye on it."],
+    ["Who updates my hours and prices?","Text us the change. We make it."],
+    ["Does it work on phones?","Designed for phones first, then checked on real ones."],
+    ["Will local customers find me?","Local search basics are set up from day one."],
+    ["What if something breaks?","A real person answers and fixes it."]
+  ];
+  var box=document.getElementById("worries"),count=document.getElementById("count");
+  var btns=items.map(function(it){
+    var b=document.createElement("button");
+    b.type="button";b.className="worry";b.setAttribute("aria-pressed","false");
+    b.innerHTML='<span class="box" aria-hidden="true">\u2713</span><span><span class="q"></span><span class="a"></span></span>';
+    b.querySelector(".q").textContent=it[0];
+    b.querySelector(".a").textContent=it[1];
+    b.addEventListener("click",function(){
+      b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")==="true"?"false":"true");
+      update();
+    });
+    box.appendChild(b);return b;
+  });
+  function update(){
+    var n=btns.filter(function(b){return b.getAttribute("aria-pressed")==="true"}).length;
+    count.textContent=n===btns.length?"All handed off. Nothing left to worry about.":n+" of "+btns.length+" handed off";
+  }
+  document.getElementById("all").addEventListener("click",function(){
+    btns.forEach(function(b,i){setTimeout(function(){b.setAttribute("aria-pressed","true");update()},i*120)});
+  });
+  /* Call scheduling: weekdays, 9 AM to 5 PM in the visitor's time zone,
+     starting at least 3 hours from now and no more than 7 days out. */
+  var START_HOUR=9,END_HOUR=17,STEP_MIN=30,MIN_HOURS=3,MAX_DAYS=7,WEEKDAYS_ONLY=true;
+  var form=document.getElementById("form"),sent=document.getElementById("sent");
+  var daysEl=document.getElementById("days"),timesEl=document.getElementById("times");
+  var errEl=document.getElementById("err"),tzEl=document.getElementById("tz");
+  var slots=[],dayIdx=0,picked=null;
+  var tzName="";
+  try{tzName=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(x){}
+  function fmtTime(d){return d.toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"})}
+  function fmtDay(d){return d.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"})}
+  function buildSlots(){
+    var now=new Date(),min=new Date(now.getTime()+MIN_HOURS*36e5),max=new Date(now.getTime()+MAX_DAYS*864e5),out=[];
+    for(var i=0;i<=MAX_DAYS;i++){
+      var day=new Date(now.getFullYear(),now.getMonth(),now.getDate()+i),dow=day.getDay();
+      if(WEEKDAYS_ONLY&&(dow===0||dow===6))continue;
+      var list=[];
+      for(var m=START_HOUR*60;m<END_HOUR*60;m+=STEP_MIN){
+        var t=new Date(day.getFullYear(),day.getMonth(),day.getDate(),0,m);
+        if(t>=min&&t<=max)list.push(t);
+      }
+      if(list.length)out.push({day:day,times:list});
+    }
+    return out;
+  }
+  function chip(html,pressed,onClick){
+    var b=document.createElement("button");
+    b.type="button";b.className="chip";b.innerHTML=html;
+    b.setAttribute("aria-pressed",pressed?"true":"false");
+    b.addEventListener("click",onClick);return b;
+  }
+  function renderTimes(){
+    timesEl.textContent="";
+    if(!slots.length)return;
+    slots[dayIdx].times.forEach(function(t){
+      timesEl.appendChild(chip(fmtTime(t),picked&&picked.getTime()===t.getTime(),function(){
+        picked=t;errEl.textContent="";renderTimes();
+      }));
+    });
+  }
+  function renderDays(){
+    daysEl.textContent="";
+    slots.forEach(function(s,i){
+      var wk=s.day.toLocaleDateString(undefined,{weekday:"short"}),dt=s.day.toLocaleDateString(undefined,{month:"short",day:"numeric"});
+      daysEl.appendChild(chip(wk+"<small>"+dt+"</small>",i===dayIdx,function(){
+        dayIdx=i;picked=null;renderDays();renderTimes();
+      }));
+    });
+  }
+  function refresh(){
+    slots=buildSlots();dayIdx=0;picked=null;
+    if(!slots.length){
+      daysEl.textContent="";timesEl.textContent="";
+      tzEl.textContent="No call times are open right now. Please check back soon.";return;
+    }
+    tzEl.textContent="Calls are weekdays, "+fmtTime(new Date(2000,0,1,START_HOUR))+" to "+fmtTime(new Date(2000,0,1,END_HOUR))+(tzName?" ("+tzName.replace(/_/g," ")+" time)":"")+". Pick a time at least "+MIN_HOURS+" hours from now, up to a week out.";
+    renderDays();renderTimes();
+  }
+  refresh();
+  form.addEventListener("submit",function(e){
+    e.preventDefault();
+    var name=form.name.value.trim(),email=form.email.value.trim(),phone=form.phone.value.trim();
+    if(!name){form.name.focus();return}
+    if(!/^\S+@\S+\.\S+$/.test(email)){form.email.focus();return}
+    if(phone.replace(/\D/g,"").length<7){form.phone.focus();return}
+    if(!picked){errEl.textContent="Please choose a day and time for your call.";return}
+    if(picked.getTime()<Date.now()+MIN_HOURS*36e5){
+      refresh();errEl.textContent="That time is too soon now. Please choose a later time.";return;
+    }
+    document.getElementById("who").textContent=name;
+    document.getElementById("when").textContent=fmtDay(picked)+" at "+fmtTime(picked);
+    document.getElementById("num").textContent=phone;
+    form.style.display="none";sent.classList.add("show");sent.focus();
+  });
+})();
+</script>
+</body>
+</html>
